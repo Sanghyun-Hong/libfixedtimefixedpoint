@@ -38,7 +38,7 @@ the rest allocated to the fractional portion of the number.
 
 To select 32 integer bits, run:
 
-    $ python generate_base.py --file base.h --pyfile base.py --intbits 32
+    $ python generate_base.py --pyfile base.py --intbits 32 --file base.h --lutfile lut.h
 
 Acceptable values are between 1 and 61. If you prefer, you can modify `base.py`
 directly. Next,

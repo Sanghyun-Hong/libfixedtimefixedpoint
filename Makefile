@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 CC := gcc
 OPTFLAGS := -O
-CFLAGS := $(OPTFLAGS) -std=c99 -Wall -Werror -Wno-unused-function -Wno-strict-aliasing -fPIC
+CFLAGS := $(OPTFLAGS) -std=c99 -Wall -Werror -Wno-unused-function -Wno-strict-aliasing -Wno-aggressive-loop-optimizations -fPIC
 LDFLAGS := -lcmocka -lm -lftfp
 
 LD_LIBRARY_PATH=.

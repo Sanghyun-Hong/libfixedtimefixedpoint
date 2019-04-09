@@ -3,6 +3,7 @@ import sys
 import math
 import decimal
 from decimal import Decimal
+from functools import reduce
 
 # We might overwrite base.py; make sure we don't generate bytecode...
 sys.dont_write_bytecode = True
@@ -59,14 +60,14 @@ if __name__ == "__main__":
 
     # Check sanity
     if (flag_bits + int_bits + frac_bits) > 64:
-        print "Too many bits! (%d (flag) + %d (int) + %d (frac) > 64)"%(flag_bits, int_bits, frac_bits)
+        print ("Too many bits! (%d (flag) + %d (int) + %d (frac) > 64)"%(flag_bits, int_bits, frac_bits))
         sys.exit(1)
     if (flag_bits + int_bits + frac_bits) < 64:
-        print "Not enough bits! (%d (flag) + %d (int) + %d (frac) < 64)"%(flag_bits, int_bits, frac_bits)
+        print ("Not enough bits! (%d (flag) + %d (int) + %d (frac) < 64)"%(flag_bits, int_bits, frac_bits))
         sys.exit(1)
     if int_bits < 1:
-        print "There must be at least one integer bit (for two's complement...)"
-        print "You asked for %d (flag), %d (int), and %d (frac)"%(flag_bits, int_bits, frac_bits)
+        print ("There must be at least one integer bit (for two's complement...)")
+        print ("You asked for %d (flag), %d (int), and %d (frac)"%(flag_bits, int_bits, frac_bits))
         sys.exit(1)
 
     # Generate the buffer size for printing
@@ -88,13 +89,13 @@ if __name__ == "__main__":
       t = (d * 2**(point_bits-2))
       t = t.quantize(decimal.Decimal('1.'), rounding=decimal.ROUND_HALF_EVEN)
       t = t * 2**2
-      return t
+      return int(t)
     def decimal_to_fix_extrabits(d, fracbits = point_bits):
       t = (d * 2**(fracbits))
       t = t.quantize(decimal.Decimal('1.'), rounding=decimal.ROUND_HALF_EVEN)
       if t < 0:
           t = Decimal(2**64) + t
-      return t
+      return int(t)
 
     fix_pi =  fix_inf_pos if int_bits < 3 else decimal_to_fix(pi)
     fix_tau = fix_inf_pos if int_bits < 4 else decimal_to_fix(tau)
@@ -149,7 +150,9 @@ static const fixed fix_e = 0x%016x;
 
 #endif"""%(buffer_length, flag_bits, frac_bits, int_bits,
            internal_frac_bits, internal_int_bits,
-           fix_pi,fix_tau,fix_e)
+           fix_pi, fix_tau, fix_e)
+
+          # write the composed header to a file
           f.write(baseh)
 
     if args["lutfile"] is not None:

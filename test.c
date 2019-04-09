@@ -260,11 +260,11 @@ TEST_HELPER(convert_dbl_##name, { \
 };)
 
 #define CONVERT_DBL_TESTS                                                \
-CONVERT_DBL(zero     , 0                       , FIX_ZERO)               \
-CONVERT_DBL(one      , 1                       , FIXNUM(1    , 0))       \
-CONVERT_DBL(one_neg  , -1                      , FIXNUM(-1   , 0))       \
-CONVERT_DBL(two      , 2                       , FIXNUM(2    , 0))       \
-CONVERT_DBL(two_neg  , -2                      , FIXNUM(-2   , 0))       \
+CONVERT_DBL(zero     , 0.0                     , FIX_ZERO)               \
+CONVERT_DBL(one      , 1.0                     , FIXNUM(1    , 0))       \
+CONVERT_DBL(one_neg  , -1.0                    , FIXNUM(-1   , 0))       \
+CONVERT_DBL(two      , 2.0                     , FIXNUM(2    , 0))       \
+CONVERT_DBL(two_neg  , -2.0                    , FIXNUM(-2   , 0))       \
 CONVERT_DBL(many     , 1000.4                  , FIXNUM(1000 , 4))       \
 CONVERT_DBL(many_neg , -1000.4                 , FIXNUM(-1000, 4))       \
 CONVERT_DBL(frac     , 0.5342                  , FIXNUM(0    , 5342))    \
@@ -814,7 +814,6 @@ EXP(max       , FIX_MAX         , FIX_INF_POS)                                  
 EXP(nan       , FIX_NAN         , FIX_NAN)                                                                \
 EXP(inf       , FIX_INF_POS     , FIX_INF_POS)                                                            \
 EXP(inf_neg   , FIX_INF_NEG     , FIX_ZERO)
-
 EXP_TESTS
 
 //////////////////////////////////////////////////////////////////////////////
